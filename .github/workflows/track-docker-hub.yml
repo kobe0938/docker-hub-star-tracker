@@ -2,10 +2,11 @@ name: Track Docker Hub Pull Counts
 
 on:
   schedule:
-    # Run at 6am PST (14:00 UTC), 12pm PST (20:00 UTC), and 6pm PST (02:00 UTC next day)
-    # Note: GitHub Actions uses UTC time
-    - cron: '0 14 * * *'  # 6am PST
-    - cron: '0 20 * * *'  # 12pm PST  
+    # Run every 6 hours: midnight, 6am, 12pm, and 6pm PST
+    # Note: GitHub Actions uses UTC time (PST = UTC-8)
+    - cron: '0 8 * * *'   # 12am PST (8am UTC)
+    - cron: '0 14 * * *'  # 6am PST (2pm UTC)
+    - cron: '0 20 * * *'  # 12pm PST (8pm UTC)  
     - cron: '0 2 * * *'   # 6pm PST (2am UTC next day)
   workflow_dispatch:      # Allow manual triggering
 
