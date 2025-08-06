@@ -1,0 +1,43 @@
+name: Track Docker Hub Pull Counts
+
+on:
+  schedule:
+    # Run at 6am PST (14:00 UTC), 12pm PST (20:00 UTC), and 6pm PST (02:00 UTC next day)
+    # Note: GitHub Actions uses UTC time
+    - cron: '0 14 * * *'  # 6am PST
+    - cron: '0 20 * * *'  # 12pm PST  
+    - cron: '0 2 * * *'   # 6pm PST (2am UTC next day)
+  workflow_dispatch:      # Allow manual triggering
+
+jobs:
+  track-pulls:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Run tracker
+      run: python tracker.py
+      
+    - name: Commit and push CSV updates
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add pull_counts.csv
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Update Docker Hub pull counts - $(date)"
+          git push
+        fi
