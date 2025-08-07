@@ -2,6 +2,7 @@ import requests
 import csv
 import os
 from datetime import datetime
+import pytz
 
 def get_pull_count(namespace: str, repo: str) -> int:
     """
@@ -15,16 +16,18 @@ def get_pull_count(namespace: str, repo: str) -> int:
 
 def save_to_csv(namespace: str, repo: str, pull_count: int, csv_file: str = "pull_counts.csv"):
     """
-    Saves the pull count data to a CSV file with timestamp.
+    Saves the pull count data to a CSV file with PST timestamp.
     """
     file_exists = os.path.isfile(csv_file)
-    timestamp = datetime.now().isoformat()
+    # Always use PST timezone
+    pst = pytz.timezone('America/Los_Angeles')
+    timestamp = datetime.now(pst).isoformat()
     
     with open(csv_file, 'a', newline='') as file:
         writer = csv.writer(file)
         # Write header if file is new
         if not file_exists:
-            writer.writerow(['timestamp', 'namespace', 'repository', 'pull_count'])
+            writer.writerow(['timestamp_pst', 'namespace', 'repository', 'pull_count'])
         writer.writerow([timestamp, namespace, repo, pull_count])
 
 if __name__ == "__main__":
