@@ -36,14 +36,17 @@ jobs:
     - name: Run tracker
       run: python tracker.py
       
-    - name: Commit and push CSV updates
+    - name: Generate visualizations
+      run: python visualize_data.py
+      
+    - name: Commit and push updates
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add pull_counts.csv
+        git add pull_counts.csv *.png
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
-          git commit -m "Update Docker Hub pull counts - $(date)"
+          git commit -m "Update Docker Hub pull counts and visualizations - $(date)"
           git push
         fi

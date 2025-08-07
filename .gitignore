@@ -35,4 +35,4 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Note: We want to keep pull_counts.csv in the repository
+# Note: We want to keep pull_counts.csv and visualization PNGs in the repository
