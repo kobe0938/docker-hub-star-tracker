@@ -1065,3 +1065,5 @@ timestamp,namespace,repository,pull_count
 2025-12-16T18:36:16.844519-08:00,lmcache,lmstack-router,182461
 2025-12-17T00:09:16.263234-08:00,lmcache,vllm-openai,96772
 2025-12-17T00:09:16.475611-08:00,lmcache,lmstack-router,183124
+2025-12-17T06:01:31.645396-08:00,lmcache,vllm-openai,96925
+2025-12-17T06:01:31.798382-08:00,lmcache,lmstack-router,183843
