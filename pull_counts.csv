@@ -2935,3 +2935,5 @@ timestamp,namespace,repository,pull_count
 2026-08-08T20:38:11.550101-07:00,lmcache,lmstack-router,726904
 2026-08-09T01:44:12.583864-07:00,lmcache,vllm-openai,193216
 2026-08-09T01:44:12.642655-07:00,lmcache,lmstack-router,727571
+2026-08-09T07:21:58.143389-07:00,lmcache,vllm-openai,193352
+2026-08-09T07:21:58.254577-07:00,lmcache,lmstack-router,728344
